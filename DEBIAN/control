@@ -1,0 +1,8 @@
+Package: algo-comp
+Version: 1.0.0
+Depends: make, mvn
+Section: utils
+Priority: optional
+Architecture: all
+Maintainer: Stone <hstone2@zagmail.gonzaga.edu>
+Description: This is a basic package set up and compare johnsons and floyd-warshalls algorithms
