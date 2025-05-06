@@ -1,1 +1,70 @@
+name: Counter Build Test
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  build:
+    name: "Run the comparison"
+    runs-on: [self-hosted, linux, CPSC334]
+    timeout-minutes: 2
+    steps:
+      - name: "Get checkout the repository to access the code"
+        uses: actions/checkout@v4
+      - name: Install make and maven
+        run: sudo apt-get install -y build-essential
+        run: sudo apt install -y maven
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - name: Run
+        run: |
+          make run
+      - name: Save png file
+        uses: actions/upload-artifact@v4
+        with:
+          name: comparison
+          path: ${{ github.workspace }}/*.png
+      - run: echo "🍏 This job's status is ${{ job.status }}."
 
+  test:
+    name: "Run Tests"
+    runs-on: [self-hosted, linux, CPSC334]
+    timeout-minutes: 2
+    steps:
+      - name: Setup dependencies
+        run: |
+          sudo apt-get update
+          sudo apt install -y maven
+      - name: "Get checkout the repository to access the code"
+        uses: actions/checkout@v4
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - name: Test
+        run: |
+          make test
+      - run: echo "🍏 This job's status is ${{ job.status }}."
+
+  buildDeb:
+    name: "Build Counter Deb File"
+    runs-on: [self-hosted, linux, CPSC334]
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install make and maven
+        run: sudo apt-get install -y build-essential
+        run: sudo apt install maven
+      - name: Build the software
+        run: make build-deb
+      - name: Save Deb file
+        uses: actions/upload-artifact@v4
+        with:
+          name: counter deb
+          path: ${{ github.workspace }}/*.deb
+
+  lint-deb:
+    name: "Lint Debian Package"
+    runs-on: [self-hosted, linux, CPSC334]
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install make
+        run: sudo apt-get install -y build-essential
+      - name: Setup dependencies
+        run: sudo make setup-dependencies
+      - name: Lint the debian package
+        run: make lint-deb

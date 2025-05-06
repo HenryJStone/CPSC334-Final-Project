@@ -14,4 +14,8 @@ build-deb:
 	./debBuild.sh
 
 deb-lint: build-deb
-	-lintian *.deb
+	-lintian graph_comp.deb
+
+setup-dependencies:
+	apt update
+	apt install -y maven python3-pip checkstyle lintian
