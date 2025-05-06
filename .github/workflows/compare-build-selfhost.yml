@@ -9,8 +9,9 @@ jobs:
       - name: "Get checkout the repository to access the code"
         uses: actions/checkout@v4
       - name: Install make and maven
-        run: sudo apt-get install -y build-essential
-        run: sudo apt install -y maven
+        run: |
+          sudo apt-get install -y build-essential
+          sudo apt install -y maven
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - name: Run
         run: |
@@ -46,8 +47,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install make and maven
-        run: sudo apt-get install -y build-essential
-        run: sudo apt install maven
+        run: |
+          sudo apt-get install -y build-essential
+          sudo apt install -y maven
       - name: Build the software
         run: make build-deb
       - name: Save Deb file
