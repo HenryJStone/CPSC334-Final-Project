@@ -23,6 +23,9 @@ cp -r ./src/main/java/cpsc450 $TMP_DIR/src/main/java/cpsc450/
 echo "copy tests"
 cp -r ./src/test/java/cpsc450 $TMP_DIR/src/test/java/cpsc450/
 
+echo "copy pom"
+cp -r ./pom.xml $TMP_DIR/
+
 echo "Building deb file"
 dpkg-deb --root-owner-group --build $TMP_DIR
 mv $TMP_DIR.deb graph_comp.deb

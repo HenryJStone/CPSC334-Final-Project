@@ -8,6 +8,10 @@ test:
 
 clean:
 	rm -f *.png
+	rm -f *.deb
 
 build-deb:
 	./debBuild.sh
+
+deb-lint: build-deb
+	-lintian *.deb

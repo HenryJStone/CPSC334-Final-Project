@@ -1,6 +1,6 @@
 Package: algo-comp
 Version: 1.0.0
-Depends: make, mvn
+Depends: make, maven
 Section: utils
 Priority: optional
 Architecture: all
