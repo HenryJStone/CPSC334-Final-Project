@@ -13,7 +13,7 @@ clean:
 build-deb:
 	./debBuild.sh
 
-deb-lint: build-deb
+lint-deb: build-deb
 	-lintian graph_comp.deb
 
 setup-dependencies:
