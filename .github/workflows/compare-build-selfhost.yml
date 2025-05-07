@@ -4,7 +4,7 @@ jobs:
   build:
     name: "Run the comparison"
     runs-on: [self-hosted, linux, CPSC334]
-    timeout-minutes: 2
+    timeout-minutes: 4
     steps:
       - name: "Get checkout the repository to access the code"
         uses: actions/checkout@v4
